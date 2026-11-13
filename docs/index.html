@@ -221,6 +221,8 @@ NVIDIA_API_KEY=nvapi-sua-chave-aqui</pre><button class="copy">copiar</button></d
       <h3>Abra o painel</h3>
       <div class="code"><pre>python skiller.py ui</pre><button class="copy">copiar</button></div>
       <p>Abre <code>http://127.0.0.1:8765</code> no navegador. O painel só escuta na sua máquina.</p>
+      <p>Quer o painel sempre ligado? No Windows, este comando o abre escondido toda vez que você entra no PC (para desfazer: <code>autostart off</code>):</p>
+      <div class="code"><pre>python skiller.py autostart on</pre><button class="copy">copiar</button></div>
     </li>
   </ol>
 </section>
@@ -312,6 +314,7 @@ SKILLER_EMBED_MODEL=text-embedding-3-small</pre><button class="copy">copiar</but
       <tr><td><code>python skiller.py report</code></td><td>Gera <code>CATALOGO.md</code> com todas as bulas.</td></tr>
       <tr><td><code>python skiller.py discover "pedido"</code></td><td>Busca repositórios no Trendshift.</td></tr>
       <tr><td><code>python skiller.py ui</code></td><td>Abre o painel local.</td></tr>
+      <tr><td><code>python skiller.py autostart on|off</code></td><td>Windows: painel sempre ligado ao entrar no PC.</td></tr>
       <tr><td><code>python skiller.py uninstall</code></td><td>Remove os hooks do Claude Code.</td></tr>
     </tbody>
   </table></div>

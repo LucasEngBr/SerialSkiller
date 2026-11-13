@@ -129,6 +129,7 @@ Without any key, it still works with plain labels built from each skill file, pl
 | `discover "prompt"` | Search trending repos on Trendshift |
 | `trendshift-sync` | Refresh the local Trendshift index |
 | `ui [--port N]` | Open the local dashboard |
+| `autostart on` / `off` | Windows: start the dashboard hidden at login (always on at 127.0.0.1:8765) |
 | `install` / `uninstall` | Add or remove the Claude Code hooks |
 
 All commands run as `python skiller.py <command>`.

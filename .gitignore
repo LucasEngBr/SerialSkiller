@@ -13,3 +13,4 @@ __pycache__/
 *.pyc
 docs/screenshots/
 ui/index.v1-liquid.html
+video/

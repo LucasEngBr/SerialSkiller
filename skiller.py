@@ -10,6 +10,7 @@ Uso rápido:
   python skiller.py report            gera CATALOGO.md
   python skiller.py stats             resumo do catálogo e do histórico
   python skiller.py ui                abre o painel (http://127.0.0.1:8765)
+  python skiller.py autostart on|off  painel sempre ligado ao entrar no Windows
   python skiller.py discover "pedido" busca repositórios no Trendshift (NVIDIA julga)
   python skiller.py trendshift-sync   atualiza o índice local do Trendshift
   python skiller.py install|uninstall liga/desliga os hooks no Claude Code
@@ -264,6 +265,38 @@ def cmd_ui(args):
     serve(args.port, not args.no_browser)
 
 
+def _startup_file() -> Path:
+    return Path(os.environ.get("APPDATA", "")) / "Microsoft/Windows/Start Menu/Programs/Startup/serial-skiller-painel.vbs"
+
+
+def cmd_autostart(args):
+    """Liga/desliga o painel ao entrar no Windows (pythonw, sem janela, sem abrir o navegador)."""
+    if os.name != "nt":
+        print("autostart só existe no Windows. No macOS/Linux, adicione aos itens de login:\n  "
+              + _hook_cmd("ui --no-browser"))
+        return
+    f = _startup_file()
+    if args.state == "off":
+        f.unlink(missing_ok=True)
+        print(f"Removido: {f}. O painel que já está rodando continua até você encerrar o pythonw.exe.")
+        return
+    pyw = Path(sys.executable).with_name("pythonw.exe")
+    if not pyw.exists():
+        pyw = Path(sys.executable)
+    me = Path(__file__).resolve()
+    f.write_text(f'CreateObject("WScript.Shell").Run """{pyw}"" ""{me}"" ui --no-browser", 0, False\r\n',
+                 encoding="utf-8", newline="")
+    print(f"Painel vai abrir sozinho ao entrar no Windows: {f}")
+    import socket
+    with socket.socket() as s:
+        running = s.connect_ex(("127.0.0.1", 8765)) == 0
+    if running:  # no Windows dois servidores conseguem abrir a mesma porta; não duplicar
+        print("O painel já está rodando em http://127.0.0.1:8765")
+    else:
+        subprocess.Popen(["wscript", str(f)])
+        print("Iniciado agora em http://127.0.0.1:8765")
+
+
 def cmd_uninstall(args):
     sp = _settings_path()
     s = json.loads(sp.read_text(encoding="utf-8"))
@@ -315,6 +348,7 @@ def main():
     sub.add_parser("report"); sub.add_parser("stats"); sub.add_parser("hook")
     sub.add_parser("session-start"); sub.add_parser("background")
     sub.add_parser("install"); sub.add_parser("uninstall")
+    p = sub.add_parser("autostart"); p.add_argument("state", choices=["on", "off"])
     p = sub.add_parser("discover"); p.add_argument("prompt", nargs="+"); p.add_argument("-k", type=int, default=6); p.add_argument("--json", action="store_true")
     p = sub.add_parser("trendshift-sync"); p.add_argument("--details", type=int, default=250)
     p = sub.add_parser("ui"); p.add_argument("--port", type=int, default=8765); p.add_argument("--no-browser", action="store_true")
@@ -324,6 +358,7 @@ def main():
         "report": cmd_report, "stats": cmd_stats, "hook": cmd_hook, "session-start": cmd_session_start,
         "background": cmd_background, "ui": cmd_ui, "discover": cmd_discover,
         "trendshift-sync": cmd_trendshift_sync, "install": cmd_install, "uninstall": cmd_uninstall,
+        "autostart": cmd_autostart,
     }[args.cmd](args)
 
 
