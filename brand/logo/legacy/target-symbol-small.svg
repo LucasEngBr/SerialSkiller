@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <title>Serial Skiller (tamanho pequeno)</title>
+  <!-- corte para 16-32 px: sem anel interno, traços mais grossos, ponto maior -->
+  <path fill="#A99BC6" fill-rule="evenodd" d="M128 36a92 92 0 1 0 0.01 0Z M128 58a70 70 0 1 1 -0.01 0Z"/>
+  <rect x="116" y="12" width="24" height="62" rx="12" fill="#A99BC6"/>
+  <rect x="116" y="182" width="24" height="62" rx="12" fill="#A99BC6"/>
+  <rect x="12" y="116" width="62" height="24" rx="12" fill="#A99BC6"/>
+  <rect x="182" y="116" width="62" height="24" rx="12" fill="#A99BC6"/>
+  <circle cx="128" cy="128" r="32" fill="#E85D75"/>
+</svg>

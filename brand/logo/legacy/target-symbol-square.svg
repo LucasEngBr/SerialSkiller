@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><title>Serial Skiller</title><g transform="translate(-1.79 -1.79) scale(1.014)">
+  
+  <!-- The Target · anel externo cortado pelas 4 hastes, anel interno, ponto alvo -->
+  <path fill="#A99BC6" fill-rule="evenodd" d="M128 38a90 90 0 1 0 0.01 0Z M128 50a78 78 0 1 1 -0.01 0Z"/>
+  <path fill="#A99BC6" fill-rule="evenodd" d="M128 82a46 46 0 1 0 0.01 0Z M128 92a36 36 0 1 1 -0.01 0Z"/>
+  <rect x="122" y="22" width="12" height="52" rx="6" fill="#A99BC6"/>
+  <rect x="122" y="182" width="12" height="52" rx="6" fill="#A99BC6"/>
+  <rect x="22" y="122" width="52" height="12" rx="6" fill="#A99BC6"/>
+  <rect x="182" y="122" width="52" height="12" rx="6" fill="#A99BC6"/>
+  <circle cx="128" cy="128" r="17" fill="#E85D75"/>
+</g></svg>

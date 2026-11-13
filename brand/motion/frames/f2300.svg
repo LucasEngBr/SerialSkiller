@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="ss-logo"><rect width="256" height="256" fill="#0B0E14"/>
+  <title>Serial Skiller</title>
+  <!--
+    Serial Skiller · animação de identidade (loop de 5 s, um único relógio).
+    0–1,5 s   reflexos partem das 2 pontas do S e deslizam até o centro
+    1,5–2,4 s ponto carmim pisca 2× (a 2ª mais intensa)
+    2,4–2,8 s ativação definitiva + halo sutil
+    2,8–4,0 s onda óptica radial: anel interno → eixos → S externo
+    4,0–5,0 s dissipação e retorno ao repouso (100% ≡ 0%: loop sem costura)
+    Geometria imóvel; só luz anima. Curvas literais dentro de @keyframes
+    (var() em keyframes é ignorado pelo Chromium).
+  -->
+  <defs>
+    <linearGradient id="ss-chrome" x1="40" y1="30" x2="216" y2="226" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E9EAF2"/>
+      <stop offset=".38" stop-color="#B7AAD6"/>
+      <stop offset=".7" stop-color="#9384BC"/>
+      <stop offset="1" stop-color="#D6CFEE"/>
+    </linearGradient>
+    <filter id="ss-soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter>
+    <filter id="ss-bloom" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+    <filter id="ss-wave" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6"/></filter>
+    <!-- máscara da onda: anel que se expande do centro e ilumina o que atravessa -->
+    <mask id="ss-wave-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="256" height="256">
+      <circle class="ss-anim ss-scale ss-wave-ring" cx="128" cy="128" r="100" fill="none" stroke="#fff" stroke-width="26" filter="url(#ss-soft)"/>
+    </mask>
+    <g id="ss-geo" fill="none" stroke-linecap="round">
+      <path d="M193.9 72.7 A86 86 0 0 0 42 128 L88 128"/>
+      <path d="M62.1 183.3 A86 86 0 0 0 214 128 L168 128"/>
+      <path d="M22 128 H42 M214 128 H234 M128 22 V88 M128 168 V234"/>
+      <circle cx="128" cy="128" r="40"/>
+    </g>
+  </defs>
+
+  <style>
+    .ss-anim{animation-duration:5s;animation-iteration-count:infinite;animation-fill-mode:both;animation-timing-function:linear}
+    .ss-scale{transform-box:fill-box;transform-origin:center}
+
+    /* energia concentrada nos traços (bloom lavanda) */
+    .ss-energy{opacity:0;animation-name:ss-energy}
+    @keyframes ss-energy{
+      0%  {opacity:0;   animation-timing-function:cubic-bezier(.77,0,.175,1)} /* --ease-in-out */
+      28% {opacity:.5;  animation-timing-function:cubic-bezier(.23,1,.32,1)}  /* --ease-out */
+      36% {opacity:.16; animation-timing-function:cubic-bezier(.77,0,.175,1)}
+      60% {opacity:.42; animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      84% {opacity:.08; animation-timing-function:cubic-bezier(.77,0,.175,1)}
+      100%{opacity:0}
+    }
+
+    /* reflexos: cabeça brilhante + rastro curto, das pontas do S até o centro */
+    .ss-head{stroke-dasharray:.055 2;stroke-dashoffset:.055;opacity:0;animation-name:ss-head,ss-flare}
+    .ss-trail{stroke-dasharray:.24 2;stroke-dashoffset:.24;opacity:0;animation-name:ss-trail,ss-flare-trail}
+    @keyframes ss-head{
+      0%  {stroke-dashoffset:.055}
+      2%  {stroke-dashoffset:.055; animation-timing-function:cubic-bezier(.77,0,.175,1)} /* --ease-in-out */
+      30% {stroke-dashoffset:-1.0}
+      100%{stroke-dashoffset:-1.0}
+    }
+    @keyframes ss-trail{
+      0%  {stroke-dashoffset:.24}
+      2%  {stroke-dashoffset:.24; animation-timing-function:cubic-bezier(.77,0,.175,1)}
+      30% {stroke-dashoffset:-.815}
+      100%{stroke-dashoffset:-.815}
+    }
+    @keyframes ss-flare{
+      0%  {opacity:0}
+      2%  {opacity:0;  animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      7%  {opacity:1}
+      25% {opacity:1;  animation-timing-function:cubic-bezier(.77,0,.175,1)}
+      31% {opacity:0}
+      100%{opacity:0}
+    }
+    @keyframes ss-flare-trail{
+      0%  {opacity:0}
+      2%  {opacity:0;  animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      8%  {opacity:.55}
+      24% {opacity:.55;animation-timing-function:cubic-bezier(.77,0,.175,1)}
+      31% {opacity:0}
+      100%{opacity:0}
+    }
+
+    /* ponto: 2 piscadas + ativação definitiva, depois volta ao repouso */
+    .ss-dot{opacity:.36;animation-name:ss-dot}
+    @keyframes ss-dot{
+      0%  {opacity:.36}
+      30% {opacity:.36; animation-timing-function:cubic-bezier(.23,1,.32,1)}  /* acende: ease-out */
+      32.5%{opacity:.95; animation-timing-function:ease}                      /* apaga: ease */
+      37% {opacity:.38; animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      39.5%{opacity:1;   animation-timing-function:ease}
+      44.5%{opacity:.42; animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      49% {opacity:1}
+      80% {opacity:1;   animation-timing-function:cubic-bezier(.77,0,.175,1)} /* dissipa: ease-in-out */
+      96% {opacity:.36}
+      100%{opacity:.36}
+    }
+    .ss-halo{opacity:0;animation-name:ss-halo,ss-halo-scale}
+    @keyframes ss-halo{
+      0%  {opacity:0}
+      30% {opacity:0;   animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      32.5%{opacity:.16; animation-timing-function:ease}
+      37% {opacity:0;   animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      39.5%{opacity:.28; animation-timing-function:ease}
+      44.5%{opacity:0;   animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      50% {opacity:.55; animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      62% {opacity:.24}
+      80% {opacity:.18; animation-timing-function:cubic-bezier(.77,0,.175,1)}
+      96% {opacity:0}
+      100%{opacity:0}
+    }
+    @keyframes ss-halo-scale{
+      0%  {transform:scale(1)}
+      48% {transform:scale(1);    animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      58% {transform:scale(1.55); animation-timing-function:cubic-bezier(.77,0,.175,1)}
+      80% {transform:scale(1.3);  animation-timing-function:cubic-bezier(.77,0,.175,1)}
+      100%{transform:scale(1)}
+    }
+
+    /* onda óptica radial (contorno visível + luz que atravessa a geometria) */
+    .ss-wave-ring{animation-name:ss-wave-scale}
+    .ss-wave{opacity:0;animation-name:ss-wave-scale,ss-wave-op}
+    .ss-lit{opacity:0;animation-name:ss-lit}
+    @keyframes ss-wave-scale{
+      0%  {transform:scale(.06)}
+      56% {transform:scale(.06); animation-timing-function:cubic-bezier(.23,1,.32,1)} /* expande: ease-out */
+      80% {transform:scale(1)}
+      82% {transform:scale(1)}
+      83% {transform:scale(.06)}
+      100%{transform:scale(.06)}
+    }
+    @keyframes ss-wave-op{
+      0%  {opacity:0}
+      56% {opacity:0;   animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      60% {opacity:.55; animation-timing-function:cubic-bezier(.77,0,.175,1)}
+      80% {opacity:0}
+      100%{opacity:0}
+    }
+    @keyframes ss-lit{
+      0%  {opacity:0}
+      56% {opacity:0;   animation-timing-function:cubic-bezier(.23,1,.32,1)}
+      60% {opacity:.95; animation-timing-function:cubic-bezier(.77,0,.175,1)}
+      81% {opacity:0}
+      100%{opacity:0}
+    }
+
+    /* movimento reduzido: logo em repouso com o alvo aceso, sem varredura */
+    @media (prefers-reduced-motion: reduce){
+      .ss-anim{animation:none}
+      .ss-dot{opacity:1}
+    }
+  .ss-anim{animation-play-state:paused!important;animation-delay:-2300ms!important}
+  </style>
+
+  <!-- 1. energia (bloom atrás da geometria) -->
+  <use href="#ss-geo" class="ss-anim ss-energy" stroke="#B7AAD6" stroke-width="14" filter="url(#ss-bloom)"/>
+
+  <!-- 2. geometria em repouso -->
+  <use href="#ss-geo" stroke="url(#ss-chrome)" stroke-width="9"/>
+
+  <!-- 3. luz da onda atravessando os traços (geometria clara, recortada pela máscara do anel) -->
+  <g mask="url(#ss-wave-mask)">
+    <use href="#ss-geo" class="ss-anim ss-lit" stroke="#F6F4FF" stroke-width="9"/>
+  </g>
+
+  <!-- 4. reflexos percorrendo o S (das pontas abertas até o centro) -->
+  <g fill="none" stroke-linecap="round">
+    <g filter="url(#ss-soft)">
+      <path class="ss-anim ss-trail" pathLength="1" stroke="#E4DCFF" stroke-width="12" d="M193.9 72.7 A86 86 0 0 0 42 128 L88 128"/>
+      <path class="ss-anim ss-trail" pathLength="1" stroke="#E4DCFF" stroke-width="12" d="M62.1 183.3 A86 86 0 0 0 214 128 L168 128"/>
+    </g>
+    <path class="ss-anim ss-head" pathLength="1" stroke="#FFFFFF" stroke-width="9" d="M193.9 72.7 A86 86 0 0 0 42 128 L88 128"/>
+    <path class="ss-anim ss-head" pathLength="1" stroke="#FFFFFF" stroke-width="9" d="M62.1 183.3 A86 86 0 0 0 214 128 L168 128"/>
+    <path class="ss-anim ss-head" pathLength="1" stroke="#FFFFFF" stroke-width="16" filter="url(#ss-soft)" d="M193.9 72.7 A86 86 0 0 0 42 128 L88 128"/>
+    <path class="ss-anim ss-head" pathLength="1" stroke="#FFFFFF" stroke-width="16" filter="url(#ss-soft)" d="M62.1 183.3 A86 86 0 0 0 214 128 L168 128"/>
+  </g>
+
+  <!-- 5. borda da onda (contorno delicado, levemente desfocado) -->
+  <circle class="ss-anim ss-scale ss-wave" cx="128" cy="128" r="100" fill="none" stroke="#EDE8FF" stroke-width="2.2" vector-effect="non-scaling-stroke" filter="url(#ss-wave)"/>
+
+  <!-- 6. ponto central + halo -->
+  <circle class="ss-anim ss-scale ss-halo" cx="128" cy="128" r="16" fill="#E85D75" filter="url(#ss-bloom)"/>
+  <circle class="ss-anim ss-dot" cx="128" cy="128" r="14" fill="#E85D75"/>
+</svg>

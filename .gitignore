@@ -1,0 +1,15 @@
+# segredos e dados locais de cada usuário (nunca publicar)
+.env
+config.json
+data/
+CATALOGO.md
+
+# notas e caches locais
+ESTADO.md
+CLAUDE.md
+.claude/
+.impeccable/
+__pycache__/
+*.pyc
+docs/screenshots/
+ui/index.v1-liquid.html

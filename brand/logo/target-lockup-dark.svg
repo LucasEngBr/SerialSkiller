@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 256">
+  <title>Serial Skiller · assinatura horizontal</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600&amp;family=JetBrains+Mono:wght@500&amp;display=block');</style>
+  <rect width="1000" height="256" rx="40" fill="#0B0E14"/>
+  <svg x="24" y="24" width="208" height="208" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="ss-chrome" x1="40" y1="30" x2="216" y2="226" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E9EAF2"/>
+      <stop offset=".38" stop-color="#B7AAD6"/>
+      <stop offset=".7" stop-color="#9384BC"/>
+      <stop offset="1" stop-color="#D6CFEE"/>
+    </linearGradient>
+  </defs>
+  
+  <g fill="none" stroke="url(#ss-chrome)" stroke-width="9" stroke-linecap="round">
+    <path d="M193.9 72.7 A86 86 0 0 0 42 128 L88 128"/>
+    <path d="M62.1 183.3 A86 86 0 0 0 214 128 L168 128"/>
+    <path d="M22 128 H42 M214 128 H234 M128 22 V88 M128 168 V234"/>
+    <circle cx="128" cy="128" r="40"/>
+  </g>
+  <circle cx="128" cy="128" r="14" fill="#E85D75"/>
+
+  </svg>
+  <text x="268" y="146" fill="#E9EAF2" font-family="Sora, Segoe UI, sans-serif" font-weight="600" font-size="84" letter-spacing="-3">Serial Skiller</text>
+  <text x="272" y="192" fill="#9097AB" font-family="JetBrains Mono, Consolas, monospace" font-weight="500" font-size="22" letter-spacing="5">SKILL INTELLIGENCE · CASE FILE</text>
+</svg>

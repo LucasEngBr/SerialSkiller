@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><title>Serial Skiller</title><rect width="256" height="256" rx="57.6" fill="#151B29"/><g transform="translate(38.91 38.91) scale(0.696)" fill="#ffffff">
+  
+  <!-- corte 16-32 px: traços grossos; anel interno mantido e hastes só por fora,
+       para o S + eixo vertical não lerem como "$" -->
+  <g fill="none" stroke="#ffffff" stroke-width="19" stroke-linecap="round">
+    <path d="M198 68 A92 92 0 0 0 36 128 L78 128"/>
+    <path d="M58 188 A92 92 0 0 0 220 128 L178 128"/>
+    <path d="M128 14 V34 M128 222 V242"/>
+    <circle cx="128" cy="128" r="46"/>
+  </g>
+  <circle cx="128" cy="128" r="22" fill="#ffffff"/>
+</g></svg>

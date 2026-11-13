@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <title>Serial Skiller · ícone (vidro)</title>
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#232A3D"/><stop offset=".55" stop-color="#151B29"/><stop offset="1" stop-color="#10141F"/></linearGradient>
+    <radialGradient id="ember" cx="1" cy="1" r=".75"><stop offset="0" stop-color="#E85D75" stop-opacity=".55"/><stop offset="1" stop-color="#E85D75" stop-opacity="0"/></radialGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#E85D75" stop-opacity=".5"/></linearGradient>
+    <linearGradient id="ss-chrome" x1="40" y1="30" x2="216" y2="226" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#E9EAF2"/><stop offset=".38" stop-color="#B7AAD6"/><stop offset=".7" stop-color="#9384BC"/><stop offset="1" stop-color="#D6CFEE"/></linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="58" fill="url(#tile)"/>
+  <rect width="256" height="256" rx="58" fill="url(#ember)"/>
+  <rect width="256" height="256" rx="58" fill="url(#sheen)"/>
+  <rect x="1" y="1" width="254" height="254" rx="57" fill="none" stroke="url(#edge)" stroke-width="2"/>
+  <g transform="translate(36 36) scale(.71875)">
+    <g fill="none" stroke="url(#ss-chrome)" stroke-width="9" stroke-linecap="round">
+      <path d="M193.9 72.7 A86 86 0 0 0 42 128 L88 128"/>
+      <path d="M62.1 183.3 A86 86 0 0 0 214 128 L168 128"/>
+      <path d="M22 128 H42 M214 128 H234 M128 22 V88 M128 168 V234"/>
+      <circle cx="128" cy="128" r="40"/>
+    </g>
+    <circle cx="128" cy="128" r="14" fill="#E85D75"/>
+  </g>
+</svg>

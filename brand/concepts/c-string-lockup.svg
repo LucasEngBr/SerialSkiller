@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 256">
+  <style>@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&amp;family=JetBrains+Mono:wght@500&amp;display=block');</style>
+  <svg x="0" y="0" width="256" height="256">  <!-- C · Quadro de investigação: 4 alfinetes ligados por barbante formando um S -->
+  <path fill="none" stroke="#000" stroke-width="16" stroke-linejoin="round" stroke-linecap="round" d="M178 58 L80 100 L176 156 L78 198"/>
+  <circle cx="178" cy="58" r="22"/><circle cx="80" cy="100" r="22"/><circle cx="176" cy="156" r="22"/><circle cx="78" cy="198" r="22"/></svg>
+  <text x="270" y="150" font-family="Bricolage Grotesque" font-weight="800" font-size="92" letter-spacing="-3">serial skiller</text>
+  <text x="274" y="196" font-family="JetBrains Mono" font-weight="500" font-size="22" letter-spacing="4">CASE FILE · SKILLS</text>
+</svg>

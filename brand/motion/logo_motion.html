@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serial Skiller Motion</title>
+<link rel="icon" href="../logo/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--obsidian:#0B0E14;--midnight:#151B29;--lavender:#A99BC6;--crimson:#E85D75;--frost:#E9EAF2;--text-3:#9097AB;--line:rgba(233,234,242,.1);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--obsidian);color:var(--frost);font:14px/1.5 Sora,"Segoe UI",sans-serif;display:flex;flex-direction:column;align-items:center;gap:28px;padding:40px 16px}
+#logo-root{width:min(70vw,420px);aspect-ratio:1}
+#logo-root svg{width:100%;height:100%;display:block}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+button{font:600 13px Sora,sans-serif;color:var(--frost);background:rgba(233,234,242,.06);border:1px solid var(--line);border-radius:12px;padding:9px 14px;cursor:pointer}
+button:hover{background:rgba(233,234,242,.1)}
+label{font:500 12px "JetBrains Mono",monospace;color:var(--text-3);display:flex;gap:10px;align-items:center}
+input[type=range]{accent-color:var(--lavender)}
+.phases{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;width:min(720px,100%)}
+.phases div{padding:10px;border-radius:10px;border:1px solid var(--line);font:500 11.5px "JetBrains Mono",monospace;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;transition:border-color .2s,color .2s}
+.phases div b{display:block;color:var(--frost);font:600 12.5px Sora,sans-serif;text-transform:none;letter-spacing:0;margin-top:2px}
+.phases div.on{border-color:var(--lavender);color:var(--lavender)}
+.time{font:500 12px "JetBrains Mono",monospace;color:var(--text-3);min-width:70px;text-align:right}
+@media (max-width:640px){.phases{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<div id="logo-root" aria-label="Logo Serial Skiller animada" role="img"></div>
+<div class="bar">
+  <button id="replay">Reiniciar</button>
+  <button id="slow">Câmera lenta</button>
+  <label>velocidade <input type="range" id="speed" min="0.25" max="2" step="0.25" value="1"></label>
+  <span class="time" id="clock">0.00 s</span>
+</div>
+<div class="phases" id="phases">
+  <div data-a="0" data-b="1500">0,0–1,5 s<b>Varredura pelo S</b></div>
+  <div data-a="1500" data-b="2400">1,5–2,4 s<b>Duas piscadas</b></div>
+  <div data-a="2400" data-b="2800">2,4–2,8 s<b>Alvo identificado</b></div>
+  <div data-a="2800" data-b="4000">2,8–4,0 s<b>Propagação radial</b></div>
+  <div data-a="4000" data-b="5000">4,0–5,0 s<b>Retorno ao repouso</b></div>
+</div>
+<script>
+(async () => {
+  const root = document.getElementById("logo-root");
+  root.innerHTML = await (await fetch("../logo/target-s-animated.svg")).text();
+  const anims = () => document.getAnimations();
+  const q = new URLSearchParams(location.search);
+  let rate = 1;
+  const setRate = r => { rate = r; anims().forEach(a => a.playbackRate = r); };
+  const seek = ms => anims().forEach(a => { a.currentTime = ms; });
+  if (q.has("t")) { anims().forEach(a => a.pause()); seek(+q.get("t")); }
+  if (q.has("static")) { anims().forEach(a => a.pause()); seek(2600); }
+  document.getElementById("replay").onclick = () => { seek(0); anims().forEach(a => a.play()); };
+  document.getElementById("slow").onclick = e => { const s = rate === 0.25 ? 1 : 0.25; setRate(s); document.getElementById("speed").value = s; };
+  document.getElementById("speed").oninput = e => setRate(+e.target.value);
+  const clock = document.getElementById("clock"), ph = [...document.querySelectorAll("#phases div")];
+  (function tick() {
+    const a = anims()[0];
+    if (a) { const t = (a.currentTime || 0) % 5000; clock.textContent = (t / 1000).toFixed(2) + " s";
+      ph.forEach(d => d.classList.toggle("on", t >= +d.dataset.a && t < +d.dataset.b)); }
+    requestAnimationFrame(tick);
+  })();
+  window.__p2mReady = true;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <title>Serial Skiller · etiqueta</title>
+  <!-- A v2 · Etiqueta de evidência deitada: furo à esquerda, S no corpo (sem ler como "$") -->
+  <path fill="#000" fill-rule="evenodd" d="M20 100 L56 64 H216 Q236 64 236 84 V172 Q236 192 216 192 H56 L20 156 Z M50 128 a12 12 0 1 0 0.01 0 Z"/>
+  <path fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round" d="M174 94 A24 24 0 1 0 152 128 A24 24 0 1 1 130 162"/>
+</svg>

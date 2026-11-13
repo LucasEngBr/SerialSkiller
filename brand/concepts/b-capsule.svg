@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- B · Cápsula da bula: metade cheia, metade vazia, costura em onda -->
+  <g transform="rotate(45 128 128)">
+    <rect x="86" y="26" width="84" height="204" rx="42" fill="none" stroke="#000" stroke-width="16"/>
+    <path fill="#000" d="M86 132 V68 A42 42 0 0 1 170 68 V124 C148 100 108 156 86 132 Z"/>
+  </g>
+</svg>

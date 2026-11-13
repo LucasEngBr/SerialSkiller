@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 256">
+  <svg x="0" y="0" width="256" height="256">  <title>Serial Skiller · barbante</title>
+  <!-- C v2 · Barbante em S contínuo entre dois alfinetes; o nó do meio é o "match" -->
+  <path fill="none" stroke="#000" stroke-width="18" stroke-linecap="round" d="M172 70 C150 46 84 52 86 92 C88 128 170 124 170 166 C170 206 104 214 82 188"/>
+  <circle cx="176" cy="62" r="24"/><circle cx="78" cy="196" r="24"/>
+  <circle cx="128" cy="128" r="15" fill="#fff" stroke="#000" stroke-width="10"/></svg>
+  <text x="270" y="150" font-family="Bricolage Grotesque, Arial Black, sans-serif" font-weight="800" font-size="92" letter-spacing="-3">serial skiller</text>
+  <text x="274" y="196" font-family="JetBrains Mono, Consolas, monospace" font-weight="500" font-size="22" letter-spacing="4">CASE FILE · SKILLS</text>
+</svg>

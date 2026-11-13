@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serial Skiller — Guia</title>
+<meta name="description" content="Guia passo a passo para instalar e usar o Serial Skiller no Claude Code.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --obsidian:#0B0E14;--midnight:#151B29;--lavender:#A99BC6;--crimson:#E85D75;--frost:#E9EAF2;--steel:#858DA0;
+  --text-2:#B9BDCB;--line:rgba(233,234,242,.09);--glass:rgba(21,27,41,.55);--glass-2:rgba(233,234,242,.04);
+  --ease-out:cubic-bezier(.23,1,.32,1);color-scheme:dark
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--obsidian);color:var(--frost);font:15.5px/1.65 Sora,"Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 520px at 85% -10%,rgba(169,155,198,.13),transparent 60%),
+             radial-gradient(700px 480px at -10% 30%,rgba(169,155,198,.07),transparent 60%),
+             radial-gradient(420px 300px at 50% 105%,rgba(232,93,117,.06),transparent 70%)}
+#ascii{position:fixed;inset:0;z-index:0;opacity:.22;pointer-events:none;font:11px/11px "JetBrains Mono",monospace;color:#5d6475;white-space:pre;overflow:hidden}
+main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:56px 20px 96px}
+a{color:var(--lavender);text-underline-offset:3px}
+a:hover{color:var(--frost)}
+code,kbd,pre{font-family:"JetBrains Mono",ui-monospace,monospace}
+code{font-size:.88em;background:var(--glass-2);border:1px solid var(--line);padding:1px 6px;border-radius:6px;color:#DCD5F0}
+
+/* hero */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;margin-bottom:56px}
+.hero .mark{width:152px;height:152px;border-radius:36px;padding:18px;background:linear-gradient(160deg,rgba(233,234,242,.08),rgba(233,234,242,.015));
+  border:1px solid rgba(233,234,242,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 30px 60px -30px rgba(0,0,0,.8);backdrop-filter:blur(8px)}
+.hero .mark img{width:100%;height:100%;display:block}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font:500 11.5px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--lavender);
+  border:1px solid var(--line);background:var(--glass-2);padding:5px 11px;border-radius:999px}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--crimson)}
+h1{font-size:clamp(34px,5.4vw,54px);line-height:1.05;letter-spacing:-.03em;margin:16px 0 14px;font-weight:700}
+h1 span{color:var(--lavender)}
+.lead{color:var(--text-2);font-size:17px;max-width:58ch;margin:0}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 14px Sora,sans-serif;text-decoration:none;color:var(--obsidian);background:var(--frost);
+  padding:11px 18px;border-radius:12px;transition:transform .16s var(--ease-out),background .16s}
+.btn.ghost{color:var(--frost);background:var(--glass-2);border:1px solid var(--line)}
+@media (hover:hover) and (pointer:fine){.btn:hover{transform:translateY(-1px)}.btn.ghost:hover{background:rgba(233,234,242,.08);color:var(--frost)}}
+.btn:active{transform:scale(.97)}
+
+/* glass cards */
+.card{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:24px 26px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:64px}
+.grid3 h3{margin:10px 0 6px;font-size:16px}
+.grid3 p{margin:0;color:var(--text-2);font-size:14px}
+.ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(169,155,198,.12);color:var(--lavender);font:600 14px "JetBrains Mono",monospace}
+
+h2{font-size:26px;letter-spacing:-.02em;margin:0 0 8px}
+.sec-sub{color:var(--text-2);margin:0 0 26px;max-width:62ch}
+section{margin-bottom:72px}
+
+/* steps */
+.steps{list-style:none;padding:0;margin:0;counter-reset:s;position:relative}
+.steps::before{content:"";position:absolute;left:21px;top:8px;bottom:8px;width:1px;background:linear-gradient(var(--lavender),rgba(169,155,198,.05))}
+.steps>li{counter-increment:s;position:relative;padding-left:66px;margin-bottom:18px}
+.steps>li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:18px;width:43px;height:43px;border-radius:13px;display:grid;place-items:center;
+  font:600 13px "JetBrains Mono",monospace;color:var(--frost);background:var(--midnight);border:1px solid rgba(169,155,198,.35);box-shadow:0 0 0 5px var(--obsidian)}
+.steps h3{margin:0 0 6px;font-size:17.5px}
+.steps p{margin:0 0 10px;color:var(--text-2)}
+.steps p:last-child{margin-bottom:0}
+.steps ol,.steps ul{color:var(--text-2);padding-left:20px;margin:6px 0 10px}
+.steps li li{margin-bottom:4px}
+
+/* code */
+.code{position:relative;margin:10px 0 4px}
+.code pre{margin:0;padding:14px 16px;padding-right:84px;border-radius:12px;background:rgba(5,7,11,.7);border:1px solid var(--line);overflow-x:auto;font-size:13.5px;line-height:1.6;color:#E4E1F1}
+.code pre .c{color:#959CB0}
+.copy{position:absolute;top:8px;right:8px;font:500 11.5px "JetBrains Mono",monospace;color:var(--text-2);background:var(--glass-2);border:1px solid var(--line);border-radius:8px;padding:5px 9px;cursor:pointer;
+  transition:color .15s,background .15s}
+.copy:hover{color:var(--frost);background:rgba(233,234,242,.08)}
+.copy.ok{color:var(--lavender)}
+.tabs{display:flex;gap:6px;margin:10px 0 0}
+.tab{font:500 12px "JetBrains Mono",monospace;color:var(--text-2);background:transparent;border:1px solid var(--line);border-radius:8px;padding:5px 10px;cursor:pointer}
+.tab[aria-selected=true]{color:var(--frost);background:rgba(169,155,198,.14);border-color:rgba(169,155,198,.4)}
+
+.note{display:flex;gap:12px;padding:14px 16px;border-radius:12px;background:rgba(169,155,198,.07);border:1px solid rgba(169,155,198,.2);color:var(--text-2);font-size:14px;margin-top:10px}
+.note b{color:var(--frost)}
+.note.warn{background:rgba(232,93,117,.06);border-color:rgba(232,93,117,.25)}
+.note .dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--lavender);margin-top:7px}
+.note.warn .dot{background:var(--crimson)}
+
+/* fake key UI */
+.keybox{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0 6px}
+.keybox div{padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--glass-2);font-size:13px;color:var(--text-2)}
+.keybox b{display:block;font:600 11px "JetBrains Mono",monospace;color:var(--lavender);letter-spacing:.08em;margin-bottom:4px}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.flow div{padding:16px;border-radius:14px;border:1px solid var(--line);background:var(--glass-2)}
+.flow b{display:block;font-size:14px;margin-bottom:4px}
+.flow span{font-size:13px;color:var(--text-2)}
+.flow em{font-style:normal;font:500 11px "JetBrains Mono",monospace;color:var(--lavender);letter-spacing:.08em}
+
+/* modes + tables */
+.modes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.modes div{padding:16px;border-radius:14px;border:1px solid var(--line);background:var(--glass-2)}
+.modes code{display:inline-block;margin-bottom:8px}
+.modes p{margin:0;font-size:13.5px;color:var(--text-2)}
+.modes .rec{border-color:rgba(169,155,198,.45);background:rgba(169,155,198,.08)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 11.5px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+td:first-child{white-space:nowrap}
+td{color:var(--text-2)}
+.tablewrap{overflow-x:auto}
+
+details{border:1px solid var(--line);border-radius:14px;background:var(--glass-2);margin-bottom:10px}
+summary{cursor:pointer;padding:14px 18px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--lavender);font:500 18px "JetBrains Mono",monospace;line-height:1;transition:transform .2s var(--ease-out)}
+details[open] summary::after{transform:rotate(45deg)}
+details>div{padding:0 18px 16px;color:var(--text-2);font-size:14.5px}
+footer{color:var(--steel);font-size:13px;text-align:center;border-top:1px solid var(--line);padding-top:28px}
+
+nav.toc{display:flex;flex-wrap:wrap;gap:6px;margin:-26px 0 56px}
+nav.toc a{font:500 12.5px "JetBrains Mono",monospace;text-decoration:none;color:var(--text-2);border:1px solid var(--line);padding:6px 11px;border-radius:999px;background:var(--glass-2)}
+nav.toc a:hover{color:var(--frost)}
+
+@media (max-width:780px){
+  .hero{grid-template-columns:1fr;gap:22px}
+  .hero .mark{width:112px;height:112px;border-radius:28px;padding:14px}
+  .grid3,.flow,.modes,.keybox{grid-template-columns:1fr 1fr}
+  .steps>li{padding-left:56px}
+}
+@media (max-width:480px){.grid3,.flow,.modes,.keybox{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}#ascii{display:none}}
+</style>
+</head>
+<body>
+<div id="ascii" aria-hidden="true"></div>
+<main>
+
+<header class="hero">
+  <div class="mark"><img src="assets/target-s-animated.svg" alt="Logo do Serial Skiller"></div>
+  <div>
+    <span class="eyebrow"><i></i>para Claude Code</span>
+    <h1>Serial <span>Skiller</span></h1>
+    <p class="lead">Cataloga tudo o que você instalou no Claude Code, escreve uma bula para cada item e, a cada pedido, mostra ao Claude só as poucas habilidades que servem.</p>
+    <div class="cta">
+      <a class="btn" href="#instalar">Instalar em 5 minutos</a>
+      <a class="btn ghost" href="https://github.com/LucasEngBr/SerialSkiller">Ver no GitHub</a>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Seções">
+  <a href="#o-que-faz">O que faz</a><a href="#instalar">Instalar</a><a href="#chave">Chave de API</a><a href="#usar">Como usar</a><a href="#modos">Modos</a><a href="#outras-apis">Outras APIs</a><a href="#comandos">Comandos</a><a href="#faq">Dúvidas</a>
+</nav>
+
+<section id="o-que-faz">
+  <div class="grid3">
+    <div class="card"><div class="ico">01</div><h3>Catálogo com bula</h3><p>Skills, skills de plugins, agentes, comandos, MCP e ferramentas nativas. Cada um ganha uma bula: para que serve, quando usar, quando evitar, pontos fortes e fracos.</p></div>
+    <div class="card"><div class="ico">02</div><h3>Recomendação por pedido</h3><p>Um hook lê seu pedido e entrega ao Claude só as 5 habilidades que combinam, com a bula de cada uma. Você escolhe, ou deixa o Claude escolher.</p></div>
+    <div class="card"><div class="ico">03</div><h3>Painel local</h3><p>Quando cada habilidade foi usada pela última vez, quais nunca foram usadas, tokens gastos, histórico de recomendações e busca no Trendshift quando nada instalado serve.</p></div>
+  </div>
+  <div class="flow" aria-label="Como funciona">
+    <div><em>1 · LOCAL</em><b>Busca por palavras</b><span>BM25 com glossário pt→en. Grátis, cerca de 50 ms.</span></div>
+    <div><em>2 · API</em><b>Similaridade</b><span>Embeddings para entender o sentido do pedido.</span></div>
+    <div><em>3 · CORTE</em><b>Só o que serve</b><span>Conversa e saudação não disparam nada.</span></div>
+    <div><em>4 · CLAUDE</em><b>Top 5 + bula</b><span>Injetado no contexto, conforme o modo escolhido.</span></div>
+  </div>
+  <div class="note"><span class="dot"></span><span>O trabalho pesado (bulas, embeddings, julgamento) vai para uma API externa de sua escolha, <b>não para os seus créditos do Claude</b>. Tudo o mais fica na sua máquina.</span></div>
+</section>
+
+<section id="instalar">
+  <h2>Instalação</h2>
+  <p class="sec-sub">Você precisa do <b>Claude Code</b>, de <b>Python 3.10 ou mais novo</b> e do <b>git</b>. Testado no Windows; em macOS e Linux deve funcionar igual (só usa a biblioteca padrão do Python e o numpy).</p>
+  <ol class="steps">
+    <li>
+      <h3>Baixe o projeto</h3>
+      <p>Escolha uma pasta fora de serviços de nuvem (OneDrive, iCloud, Dropbox): o catálogo guarda dados locais seus.</p>
+      <div class="code"><pre>git clone https://github.com/LucasEngBr/SerialSkiller.git
+cd SerialSkiller
+python -m pip install -r requirements.txt</pre><button class="copy">copiar</button></div>
+      <p>Em macOS e Linux, use <code>python3</code> no lugar de <code>python</code>.</p>
+    </li>
+    <li>
+      <h3>Pegue uma chave de API gratuita</h3>
+      <p>Siga o passo a passo da <a href="#chave">seção abaixo</a>. A NVIDIA é o padrão, mas qualquer API compatível com OpenAI serve.</p>
+    </li>
+    <li>
+      <h3>Crie o arquivo <code>.env</code></h3>
+      <p>Copie o modelo e cole a sua chave nele. Esse arquivo nunca vai para o git.</p>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" data-t="win">Windows</button>
+        <button class="tab" role="tab" aria-selected="false" data-t="nix">macOS / Linux</button>
+      </div>
+      <div class="code" data-p="win"><pre>copy .env.example .env
+notepad .env</pre><button class="copy">copiar</button></div>
+      <div class="code" data-p="nix" hidden><pre>cp .env.example .env
+nano .env</pre><button class="copy">copiar</button></div>
+      <div class="code"><pre><span class="c"># dentro do .env</span>
+NVIDIA_API_KEY=nvapi-sua-chave-aqui</pre><button class="copy">copiar</button></div>
+    </li>
+    <li>
+      <h3>Monte o catálogo</h3>
+      <p>Lê tudo o que está instalado e gera as bulas com IA. Na primeira vez leva alguns minutos, conforme quantas habilidades você tem; depois, só o que mudar é refeito.</p>
+      <div class="code"><pre>python skiller.py enrich</pre><button class="copy">copiar</button></div>
+    </li>
+    <li>
+      <h3>Ligue os hooks no Claude Code</h3>
+      <p>Adiciona dois hooks ao <code>~/.claude/settings.json</code> (com backup automático) e cria a skill <code>serial-skiller</code>:</p>
+      <ul>
+        <li><b>UserPromptSubmit</b>: recomenda habilidades a cada pedido.</li>
+        <li><b>SessionStart</b>: em segundo plano, cataloga o que você instalou de novo.</li>
+      </ul>
+      <div class="code"><pre>python skiller.py install</pre><button class="copy">copiar</button></div>
+      <div class="note"><span class="dot"></span><span>Feche e abra o Claude Code depois disso. Se mudar a pasta do projeto de lugar, rode <code>install</code> de novo.</span></div>
+    </li>
+    <li>
+      <h3>Abra o painel</h3>
+      <div class="code"><pre>python skiller.py ui</pre><button class="copy">copiar</button></div>
+      <p>Abre <code>http://127.0.0.1:8765</code> no navegador. O painel só escuta na sua máquina.</p>
+    </li>
+  </ol>
+</section>
+
+<section id="chave">
+  <h2>Chave de API da NVIDIA (grátis)</h2>
+  <p class="sec-sub">A NVIDIA oferece acesso gratuito para desenvolvedores aos modelos do build.nvidia.com, sem cartão de crédito. Os limites e o prazo do plano gratuito são definidos pela NVIDIA.</p>
+  <ol class="steps">
+    <li>
+      <h3>Entre no build.nvidia.com</h3>
+      <p>Abra <a href="https://build.nvidia.com/settings/api-keys" target="_blank" rel="noopener">build.nvidia.com/settings/api-keys</a> e faça login (ou crie uma conta NVIDIA gratuita).</p>
+    </li>
+    <li>
+      <h3>Gere a chave</h3>
+      <p>Clique em <b>Generate API Key</b>, dê um nome (por exemplo <code>serial-skiller</code>) e confirme.</p>
+      <div class="keybox" aria-hidden="true">
+        <div><b>1</b>Login</div><div><b>2</b>Settings → API Keys</div><div><b>3</b>Generate API Key</div><div><b>4</b>Copiar <code>nvapi-…</code></div>
+      </div>
+    </li>
+    <li>
+      <h3>Copie e guarde</h3>
+      <p>A chave começa com <code>nvapi-</code> e só aparece uma vez. Cole no seu <code>.env</code> como mostrado no passo 3 da instalação.</p>
+      <div class="note warn"><span class="dot"></span><span><b>Trate a chave como senha.</b> Não cole em chats, issues ou commits. Se vazar, apague-a na mesma página e gere outra.</span></div>
+    </li>
+  </ol>
+  <p class="sec-sub" style="margin-top:18px">Modelos usados por padrão: <code>nvidia/nemotron-3.5-lightning-30b-a3b</code> (bulas), <code>minimaxai/minimax-m3.1-flash</code> (julgamento) e <code>nvidia/nemotron-3.5-embed-1b</code> (embeddings).</p>
+</section>
+
+<section id="usar">
+  <h2>Como usar no dia a dia</h2>
+  <p class="sec-sub">Depois de instalado, você não precisa fazer nada: é só usar o Claude Code normalmente.</p>
+  <ol class="steps">
+    <li><h3>Faça um pedido</h3><p>Por exemplo: <i>"cria um dashboard de vendas em React"</i>. O hook encontra as habilidades que combinam e entrega ao Claude o top 5 com bula.</p></li>
+    <li><h3>Escolha</h3><p>No modo padrão (<code>ask</code>), o Claude pergunta quais aplicar, com a mais indicada marcada <i>(Recomendado)</i> e a opção "Nenhuma, siga normal".</p></li>
+    <li><h3>Nada instalado serve?</h3><p>O Claude oferece buscar repositórios em alta no <a href="https://trendshift.io" target="_blank" rel="noopener">Trendshift</a> que resolvam o pedido, com nota, motivo e como usar.</p></li>
+    <li><h3>Atalhos no pedido</h3>
+      <ul>
+        <li><code>#noskill</code> no pedido: pula a recomendação dessa vez.</li>
+        <li><code>#skiller auto</code> (ou <code>ask</code>, <code>suggest</code>, <code>off</code>): troca o modo.</li>
+        <li>Pedidos que começam com <code>/</code> e mensagens curtas são ignorados.</li>
+      </ul>
+    </li>
+  </ol>
+</section>
+
+<section id="modos">
+  <h2>Modos</h2>
+  <p class="sec-sub">Troque pelo painel, com <code>python skiller.py mode &lt;modo&gt;</code> ou com <code>#skiller &lt;modo&gt;</code> no pedido.</p>
+  <div class="modes">
+    <div class="rec"><code>ask</code><p><b>Padrão.</b> O Claude pergunta quais habilidades aplicar antes de começar.</p></div>
+    <div><code>auto</code><p>O Claude escolhe sozinho e diz qual usou.</p></div>
+    <div><code>suggest</code><p>Só mostra a lista ao Claude, sem instrução.</p></div>
+    <div><code>off</code><p>Desligado. O hook não faz nada.</p></div>
+  </div>
+</section>
+
+<section id="outras-apis">
+  <h2>Usar outra API</h2>
+  <p class="sec-sub">Qualquer API compatível com OpenAI funciona. Defina a URL, a chave e os três modelos no <code>.env</code>:</p>
+  <div class="code"><pre><span class="c"># exemplo com OpenAI</span>
+SKILLER_API_BASE=https://api.openai.com/v1
+SKILLER_API_KEY=sk-...
+SKILLER_CHAT_MODEL=gpt-4.1-mini
+SKILLER_RERANK_MODEL=gpt-4.1-mini
+SKILLER_EMBED_MODEL=text-embedding-3-small</pre><button class="copy">copiar</button></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Provedor</th><th>SKILLER_API_BASE</th><th>Observação</th></tr></thead>
+    <tbody>
+      <tr><td>NVIDIA (padrão)</td><td><code>https://integrate.api.nvidia.com/v1</code></td><td>Grátis para desenvolvedores. Basta <code>NVIDIA_API_KEY</code>.</td></tr>
+      <tr><td>OpenAI</td><td><code>https://api.openai.com/v1</code></td><td>Pago por uso.</td></tr>
+      <tr><td>OpenRouter</td><td><code>https://openrouter.ai/api/v1</code></td><td>Vários modelos; confira se o escolhido tem embeddings.</td></tr>
+      <tr><td>Ollama (local)</td><td><code>http://localhost:11434/v1</code></td><td>Roda na sua máquina, sem custo. Use qualquer texto como chave.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><span class="dot"></span><span>Trocou o modelo de embeddings? Rode <code>python skiller.py enrich</code> de novo para refazer o índice.</span></div>
+</section>
+
+<section id="comandos">
+  <h2>Comandos</h2>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Comando</th><th>O que faz</th></tr></thead>
+    <tbody>
+      <tr><td><code>python skiller.py sync</code></td><td>Recataloga o que está instalado (rápido, sem IA).</td></tr>
+      <tr><td><code>python skiller.py enrich</code></td><td>Recataloga e gera bulas por IA só do que mudou.</td></tr>
+      <tr><td><code>python skiller.py rec "pedido"</code></td><td>Testa a recomendação para um pedido.</td></tr>
+      <tr><td><code>python skiller.py show &lt;nome&gt;</code></td><td>Mostra a bula de uma habilidade.</td></tr>
+      <tr><td><code>python skiller.py mode [modo]</code></td><td>Mostra ou troca o modo.</td></tr>
+      <tr><td><code>python skiller.py stats</code></td><td>Uso por habilidade e as que nunca foram usadas.</td></tr>
+      <tr><td><code>python skiller.py report</code></td><td>Gera <code>CATALOGO.md</code> com todas as bulas.</td></tr>
+      <tr><td><code>python skiller.py discover "pedido"</code></td><td>Busca repositórios no Trendshift.</td></tr>
+      <tr><td><code>python skiller.py ui</code></td><td>Abre o painel local.</td></tr>
+      <tr><td><code>python skiller.py uninstall</code></td><td>Remove os hooks do Claude Code.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="faq">
+  <h2>Dúvidas</h2>
+  <details><summary>Instalei uma skill nova. Ela aparece sozinha?</summary><div>Sim. Ao abrir uma sessão nova do Claude Code, o hook <code>SessionStart</code> cataloga em segundo plano e gera a bula. Para forçar na hora: <code>python skiller.py enrich</code>.</div></details>
+  <details><summary>O que sai da minha máquina?</summary><div>Para a API que você escolheu vão: o texto das skills (para gerar as bulas) e o seu pedido (para buscar e julgar). Catálogo, bulas, histórico, uso e a chave ficam na pasta <code>data/</code> e no <code>.env</code>, que não vão para o git. O painel só escuta em <code>127.0.0.1</code>.</div></details>
+  <details><summary>Funciona sem chave de API?</summary><div>Funciona com menos precisão: as bulas são montadas a partir do próprio arquivo da skill e a busca fica só por palavras (BM25).</div></details>
+  <details><summary>Deixa o Claude mais lento?</summary><div>O hook leva cerca de 1 segundo por pedido. O julgamento por IA no hook vem desligado (<code>hook_rerank</code>) porque somaria de 2 a 10 segundos.</div></details>
+  <details><summary>Como desinstalar?</summary><div><code>python skiller.py uninstall</code> remove os hooks. Depois apague a pasta do projeto e, se quiser, <code>~/.claude/skills/serial-skiller</code>.</div></details>
+</section>
+
+<footer>Serial Skiller · licença MIT · não é afiliado à Anthropic nem à NVIDIA.</footer>
+</main>
+
+<script>
+// copiar
+document.querySelectorAll(".copy").forEach(b => b.addEventListener("click", async () => {
+  const t = b.parentElement.querySelector("pre").innerText.split("\n").filter(l => !l.trim().startsWith("#")).join("\n");
+  try { await navigator.clipboard.writeText(t); b.textContent = "copiado"; b.classList.add("ok"); }
+  catch { b.textContent = "erro"; }
+  setTimeout(() => { b.textContent = "copiar"; b.classList.remove("ok"); }, 1400);
+}));
+// abas de sistema
+const tabs = [...document.querySelectorAll(".tab")];
+const pick = t => { tabs.forEach(x => x.setAttribute("aria-selected", x.dataset.t === t));
+  document.querySelectorAll("[data-p]").forEach(p => p.hidden = p.dataset.p !== t); };
+tabs.forEach(t => t.addEventListener("click", () => pick(t.dataset.t)));
+if (!/Win/i.test(navigator.platform || navigator.userAgent)) pick("nix");
+// fundo ASCII orgânico
+(() => {
+  const el = document.getElementById("ascii");
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const R = " .·:-=+*#%@"; let cols, rows, t = 0, last = 0;
+  const size = () => { cols = Math.ceil(innerWidth / 6.6); rows = Math.ceil(innerHeight / 11); };
+  size(); addEventListener("resize", size);
+  const frame = now => {
+    requestAnimationFrame(frame);
+    if (now - last < 90 || document.hidden) return; last = now; t += .035;
+    let s = "";
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const v = Math.sin(x * .06 + t) + Math.sin(y * .09 - t * .8) + Math.sin((x + y) * .035 + t * .6) + Math.sin(Math.hypot(x - cols * .7, y - rows * .2) * .08 - t * 1.3);
+        const n = (v + 4) / 8, k = Math.max(0, Math.min(R.length - 1, Math.floor(n * n * R.length)));
+        s += R[k];
+      }
+      s += "\n";
+    }
+    el.textContent = s;
+  };
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

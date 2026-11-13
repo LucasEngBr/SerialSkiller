@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- C · Quadro de investigação: 4 alfinetes ligados por barbante formando um S -->
+  <path fill="none" stroke="#000" stroke-width="16" stroke-linejoin="round" stroke-linecap="round" d="M178 58 L80 100 L176 156 L78 198"/>
+  <circle cx="178" cy="58" r="22"/><circle cx="80" cy="100" r="22"/><circle cx="176" cy="156" r="22"/><circle cx="78" cy="198" r="22"/>
+</svg>

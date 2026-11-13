@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 256">
+  
+  <svg x="0" y="0" width="256" height="256">  <!-- B · Cápsula da bula: metade cheia, metade vazia, costura em onda -->
+  <g transform="rotate(45 128 128)">
+    <rect x="86" y="26" width="84" height="204" rx="42" fill="none" stroke="#000" stroke-width="16"/>
+    <path fill="#000" d="M86 132 V68 A42 42 0 0 1 170 68 V124 C148 100 108 156 86 132 Z"/>
+  </g></svg>
+  <text x="270" y="150" font-family="Bricolage Grotesque, Arial Black, sans-serif" font-weight="800" font-size="92" letter-spacing="-3">serial skiller</text>
+  <text x="274" y="196" font-family="JetBrains Mono, Consolas, monospace" font-weight="500" font-size="22" letter-spacing="4">CASE FILE · SKILLS</text>
+</svg>

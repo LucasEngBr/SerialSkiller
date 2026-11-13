@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serial Skiller · Identidade</title>
+<link rel="icon" href="logo/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--obsidian:#0B0E14;--midnight:#151B29;--lavender:#A99BC6;--crimson:#E85D75;--frost:#E9EAF2;--steel:#858DA0;
+  --line:rgba(233,234,242,.1);--text-2:#C3C6D4;--text-3:#9097AB;--sans:Sora,"Segoe UI",sans-serif;--mono:"JetBrains Mono",Consolas,monospace;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--obsidian);color:var(--frost);font:14px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:56px 24px 96px}
+.eyebrow{font:500 11px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+h1{font-size:clamp(34px,6vw,60px);font-weight:600;letter-spacing:-.045em;line-height:1.02;margin:12px 0 16px}
+h2{font-size:22px;font-weight:600;letter-spacing:-.025em;margin:0 0 6px}
+section{padding:56px 0;border-top:1px solid var(--line)}
+section>p{color:var(--text-2);max-width:62ch;margin:0 0 28px}
+.lead{color:var(--text-2);font-size:16px;max-width:60ch}
+.hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:center;padding-bottom:40px}
+.tile{border-radius:22px;border:1px solid var(--line);background:var(--midnight);display:grid;place-items:center;padding:28px}
+.tile img{max-width:100%}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.cap{font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-top:10px}
+.sw{border-radius:18px;padding:22px;min-height:150px;display:flex;flex-direction:column;justify-content:flex-end;border:1px solid var(--line)}
+.sw b{font-size:17px;font-weight:600}.sw code{font-family:var(--mono);font-size:13px}
+.sw small{font-size:12px;margin-top:6px;font-weight:500}
+.type{border:1px solid var(--line);border-radius:18px;padding:26px}
+.spec{font:13px var(--mono);color:var(--text-3)}
+.rule{display:flex;gap:14px;padding:16px;border:1px solid var(--line);border-radius:16px;align-items:flex-start}
+.rule i{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:none}
+.rule b{display:block;font-weight:600}.rule span{color:var(--text-2);font-size:13px}
+.motion{border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.motion svg{width:26px;height:26px;color:var(--lavender)}
+.motion b{font-weight:600}.motion span{color:var(--text-2);font-size:13px}
+.demo-scan{height:64px;border-radius:12px;background:rgba(11,14,20,.6);border:1px solid var(--line);position:relative;overflow:hidden}
+.demo-scan::after{content:"";position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--lavender),transparent);animation:scan 2.2s ease-in-out infinite}
+@keyframes scan{from{top:0}to{top:100%}}
+.demo-acq{height:64px;border-radius:12px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font:500 11px var(--mono);letter-spacing:.1em;color:#F08A9C;animation:acq 2.6s ease-out infinite}
+@keyframes acq{0%,100%{border-color:var(--line);box-shadow:none}15%{border-color:var(--crimson);box-shadow:0 0 0 3px rgba(232,93,117,.2)}45%{border-color:var(--line);box-shadow:none}}
+.sizes{display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap}
+.sizes div{text-align:center}
+.dont{position:relative}
+.dont::after{content:"";position:absolute;inset:12px;border-top:2px solid var(--crimson);transform:rotate(-12deg);transform-origin:center;top:50%}
+a{color:var(--lavender)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+@media (max-width:820px){.hero,.g2,.g3,.g4{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <h1>Serial Skiller</h1>
+      <p class="lead">Um investigador para o seu arquivo de habilidades. Lê o pedido, examina as pistas e aponta a skill certa, sem você precisar decorar comandos.</p>
+      <p class="spec">Trocadilho: <i>serial killer</i> → <i>serial skiller</i>. O tom é de dossiê, preciso e calmo, nunca violento.<br>Guia de marca v1 · Noir Glass.</p>
+    </div>
+    <div class="tile" style="background:radial-gradient(circle at 50% 45%,#1B2133,#0B0E14 70%)"><img src="logo/target-s-animated.svg" alt="Logo Serial Skiller animada: reflexos percorrem o S, o ponto carmim acende e uma onda se espalha" width="260" height="260"></div>
+  </div>
+
+  <section>
+    <div class="eyebrow">01 · Marca</div><h2>The Target</h2>
+    <p>Uma mira cujo anel externo é um <b>S</b>: o arco de cima, o eixo horizontal e o arco de baixo formam a letra. A mira é a precisão de identificar a habilidade certa; o ponto carmim é o <i>match</i>. Use sempre a geometria do master, sem redesenhar. A versão animada (5 s em loop) conta a história: investiga → encontra → confirma → propaga → recomeça. <a href="motion/logo_motion.html">Ver a animação</a>.</p>
+    <div class="grid g3">
+      <div><div class="tile"><img src="logo/target-s.svg" alt="Símbolo" width="150" height="150"></div><div class="cap">Símbolo · master</div></div>
+      <div><div class="tile" style="background:var(--frost)"><img src="logo/target-s-black.svg" alt="Versão em uma cor" width="150" height="150" onerror="this.src='logo/target-s-mono-a99bc6.svg'"></div><div class="cap">Uma cor</div></div>
+      <div><div class="tile"><img src="logo/target-s-small.svg" alt="Corte para tamanhos pequenos" width="150" height="150"></div><div class="cap">Corte pequeno · 16–32 px</div></div>
+    </div>
+    <div class="tile" style="margin-top:16px;padding:20px 28px;place-items:start"><img src="logo/target-lockup-dark.svg" alt="Assinatura horizontal" style="width:min(640px,100%)"></div>
+    <div class="cap">Assinatura horizontal</div>
+    <div style="margin-top:28px" class="sizes">
+      <div><img src="logo/target-s.svg" width="96" height="96" alt=""><div class="cap">96</div></div>
+      <div><img src="logo/target-s.svg" width="48" height="48" alt=""><div class="cap">48</div></div>
+      <div><img src="logo/target-s-small.svg" width="32" height="32" alt=""><div class="cap">32</div></div>
+      <div><img src="logo/target-s-small.svg" width="16" height="16" alt=""><div class="cap">16</div></div>
+    </div>
+    <div class="grid g3" style="margin-top:28px">
+      <div class="rule"><i style="background:var(--lavender)"></i><div><b>Respiro</b><span>Margem mínima = raio do anel interno ao redor do símbolo.</span></div></div>
+      <div class="rule"><i style="background:var(--lavender)"></i><div><b>Tamanho mínimo</b><span>Master a partir de 40 px. Abaixo, use o corte pequeno.</span></div></div>
+      <div class="rule"><i style="background:var(--crimson)"></i><div><b>Não faça</b><span>Girar, trocar o carmim por outra cor, adicionar sombra ou brilho, colocar sobre fundo claro sem a versão de uma cor.</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">02 · Cor</div><h2>Noir Glass</h2>
+    <p>Fundo escuro e frio, superfícies de vidro, lavanda como cor de marca e carmim reservado para o alvo: o match, o alerta, o que exige atenção. Carmim nunca é decoração.</p>
+    <div class="grid g3">
+      <div class="sw" style="background:#0B0E14"><b>Obsidian</b><code>#0B0E14</code><small>Fundo da aplicação</small></div>
+      <div class="sw" style="background:#151B29"><b>Midnight</b><code>#151B29</code><small>Superfícies e ícone</small></div>
+      <div class="sw" style="background:#A99BC6;color:#0B0E14"><b>Ghost Lavender</b><code>#A99BC6</code><small>Marca, foco, seleção</small></div>
+      <div class="sw" style="background:#E85D75;color:#0B0E14"><b>Cold Crimson</b><code>#E85D75</code><small>Só o alvo / match / alerta</small></div>
+      <div class="sw" style="background:#E9EAF2;color:#0B0E14"><b>Frost</b><code>#E9EAF2</code><small>Texto principal</small></div>
+      <div class="sw" style="background:#858DA0;color:#0B0E14"><b>Muted Steel</b><code>#858DA0</code><small>Ícones neutros, inativos</small></div>
+    </div>
+    <p class="spec" style="margin-top:18px">Texto secundário em superfícies: <code>#C3C6D4</code> · terciário: <code>#9097AB</code> (AA sobre Obsidian/Midnight). Vidro: <code>rgba(21,27,41,.56)</code> + blur 22 px + borda <code>rgba(233,234,242,.14)</code>.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">03 · Tipografia</div><h2>Sora + JetBrains Mono</h2>
+    <p>Sora é geométrica como a mira: círculos limpos, leitura fácil em telas escuras. JetBrains Mono faz a voz de "arquivo do caso": rótulos, números, códigos e invocações.</p>
+    <div class="grid g2">
+      <div class="type"><div style="font:600 46px/1 var(--sans);letter-spacing:-.04em">Serial Skiller</div>
+        <p style="color:var(--text-2);margin:14px 0 6px">Investigação de habilidades. Bula de cada skill, pronta no momento certo.</p>
+        <div class="spec">Sora · 600 títulos (−3% a −4,5% tracking) · 400/500 texto</div></div>
+      <div class="type"><div style="font:500 13px var(--mono);letter-spacing:.16em;color:var(--text-3)">CASE FILE № 0797</div>
+        <div style="font:500 28px/1.2 var(--mono);margin:14px 0;color:var(--lavender)">target acquired · 10/10</div>
+        <div class="spec">JetBrains Mono · 500 · rótulos em CAIXA ALTA, +10% a +16% tracking</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">04 · Movimento</div><h2>Microinterações</h2>
+    <p>Movimento só quando comunica estado. Curtas (160–400 ms), saída suave, e desligadas com <code>prefers-reduced-motion</code>.</p>
+    <div class="grid g4">
+      <div class="motion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><circle cx="12" cy="12" r="3"/></svg><b>Context Scan</b><span>Linha lavanda varre o painel enquanto o pedido é analisado.</span><div class="demo-scan"></div></div>
+      <div class="motion"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M50 26A22 22 0 1 1 30 10"/><path d="M44 36A16 16 0 1 1 40 20"/><path d="M38 30A10 10 0 1 1 26 24"/></svg><b>Skill Fingerprint</b><span>Cada habilidade ganha uma assinatura de arcos única, gerada do nome.</span></div>
+      <div class="motion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg><b>Target Acquired</b><span>Contorno carmim breve no cartão escolhido, depois a confirmação de match.</span><div class="demo-acq">TARGET ACQUIRED</div></div>
+      <div class="motion"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="12" cy="6" r="2"/><path d="M12 8v4M12 12l-5 4.5M12 12l5 4.5"/></svg><b>Intelligence Network</b><span>Nós e linhas finas ligam projetos às skills que eles usaram.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">05 · Arquivos</div><h2>Entrega</h2>
+    <p>Masters em SVG na pasta <code>brand/logo/</code>. O nome na assinatura usa a fonte Sora como texto; para gráficas, converta em contornos.</p>
+    <div class="grid g3 spec">
+      <div class="rule"><div><b style="color:var(--frost)">Símbolo</b>target-s.svg · target-s-small.svg · target-s-mono-a99bc6.svg · target-s-animated.svg</div></div>
+      <div class="rule"><div><b style="color:var(--frost)">Ícones</b>favicon.svg/.ico · apple-touch-icon.png · icon-192/512.png · maskable-512.png</div></div>
+      <div class="rule"><div><b style="color:var(--frost)">Assinaturas</b>target-lockup-dark.svg · target-lockup-light.svg · target-s-glass-icon.svg</div></div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 256">
+  <style>@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&amp;family=JetBrains+Mono:wght@500&amp;display=block');</style>
+  <svg x="0" y="0" width="256" height="256">  <!-- A · Etiqueta de evidência: tag com furo + S vazado -->
+  <path fill="#000" fill-rule="evenodd" d="M104 28 H152 L188 64 V212 Q188 232 168 232 H88 Q68 232 68 212 V64 Z M128 52 a13 13 0 1 0 0.01 0 Z"/>
+  <path fill="none" stroke="#fff" stroke-width="22" stroke-linecap="round" d="M151 116 A26 26 0 1 0 128 154 A26 26 0 1 1 105 192"/></svg>
+  <text x="270" y="150" font-family="Bricolage Grotesque" font-weight="800" font-size="92" letter-spacing="-3">serial skiller</text>
+  <text x="274" y="196" font-family="JetBrains Mono" font-weight="500" font-size="22" letter-spacing="4">CASE FILE · SKILLS</text>
+</svg>
