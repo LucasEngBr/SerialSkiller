@@ -293,7 +293,11 @@ def cmd_autostart(args):
     if running:  # no Windows dois servidores conseguem abrir a mesma porta; não duplicar
         print("O painel já está rodando em http://127.0.0.1:8765")
     else:
-        subprocess.Popen(["wscript", str(f)])
+        # cria via WMI: fica fora da árvore do processo atual (ex.: Claude Code), que mata os filhos ao fechar
+        cmd = f'wscript.exe "{f}"'.replace("'", "''")
+        subprocess.run(["powershell", "-NoProfile", "-Command",
+                        f"Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{{CommandLine='{cmd}'}} | Out-Null"],
+                       check=False)
         print("Iniciado agora em http://127.0.0.1:8765")
 
 
